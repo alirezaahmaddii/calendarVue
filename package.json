@@ -1,0 +1,23 @@
+{
+  "name": "calendarvue",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@daypilot/daypilot-lite-vue": "^3.5.0",
+    "bootstrap": "^5.1.3",
+    "daypilot-pro-vue": "^0.0.0",
+    "sass": "^1.53.0",
+    "v-calendar": "^3.0.0-alpha.6",
+    "vue": "^3.2.25",
+    "vue-calendar-3": "^1.2.41"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.3",
+    "vite": "^2.9.9"
+  }
+}
