@@ -1,79 +1,170 @@
 <template>
-  <DayPilotCalendar id="dp" :config="config" ref="calendar" />
-
+<div>
+  <my-calendar></my-calendar>
+</div>
 </template>
 
 
 <script>
-import {DayPilot, DayPilotCalendar} from '@daypilot/daypilot-lite-vue '
-
+import myCalendar from './component/new-calendar.vue'
 export default {
-  name: 'Calendar',
-  data: function() {
-    return {
-      config: {
-        viewType: "Week",
-        onTimeRangeSelected: (args) => {
-          DayPilot.Modal.prompt("Create a new event:", "Event 1").then((modal) => {
-            var dp = args.control;
-            dp.clearSelection();
-            if (modal.canceled) {
-              return;
-            }
-            dp.events.add({
-              start: args.start,
-              end: args.end,
-              id: DayPilot.guid(),
-              text: modal.result
-            });
-          });
-        },
-        eventDeleteHandling: "Disabled",
-        onEventMoved: () => {
-          this.message("Event moved");
-        },
-        onEventResized: () => {
-          this.message("Event resized");
-        },
-      },
-    }
-  },
-  components: {
-    DayPilotCalendar
-  },
-  computed: {
-    calendar() {
-      return this.$refs.calendar.control;
-    }
-  },
-  methods: {
-    loadEvents() {
-      // placeholder for an AJAX call
-      var data = [
-        {
-          id: 1,
-          start: DayPilot.Date.today().addHours(10),
-          end: DayPilot.Date.today().addHours(11),
-          text: "Event 1"
-        },
-        {
-          id: 2,
-          start: DayPilot.Date.today().addHours(13),
-          end: DayPilot.Date.today().addHours(16),
-          text: "Event 2"
-        }
-      ];
-      this.calendar.update({events: data});
-    },
-  },
-  mounted() {
-    this.loadEvents();
-    this.calendar.message("Welcome!");
-  }
+components:{
+  myCalendar
+}
 }
 </script>
-
-
-<style lang="scss">
+<style>
 
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<template>-->
+<!--  <div class="wrap">-->
+<!--    <div class="left">-->
+<!--      <DayPilotNavigator id="nav" :config="navigatorConfig" />-->
+<!--    </div>-->
+<!--    <div class="content">-->
+<!--      <DayPilotCalendar id="dp" :config="config" ref="calendar" />-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</template>-->
+
+<!--<script>-->
+<!--import {DayPilot, DayPilotCalendar, DayPilotNavigator} from '@daypilot/daypilot-lite-vue'-->
+
+<!--export default {-->
+<!--  name: 'Calendar',-->
+<!--  data: function() {-->
+<!--    return {-->
+
+<!--      events: [],-->
+<!--      navigatorConfig: {-->
+<!--        showMonths: 3,-->
+<!--        skipMonths: 3,-->
+<!--        selectMode: "Day",-->
+<!--        startDate: "2022-03-01",-->
+<!--        selectionDay: "2022-02-28",-->
+<!--        onTimeRangeSelected: args => {-->
+<!--          this.config.startDate = args.day;-->
+<!--        }-->
+<!--      },-->
+<!--      config: {-->
+<!--        viewType: "Days",-->
+<!--        startDate: "2022-02-28",-->
+<!--        durationBarVisible: false,-->
+<!--        timeRangeSelectedHandling: "Enabled",-->
+<!--        onTimeRangeSelected: async (args) => {-->
+<!--          const modal = await DayPilot.Modal.prompt("Create a new event:", "Event 1");-->
+<!--          const dp = args.control;-->
+<!--          dp.clearSelection();-->
+<!--          if (modal.canceled) {-->
+<!--            return;-->
+<!--          }-->
+<!--          dp.events.add({-->
+<!--            start: args.start,-->
+<!--            end: args.end,-->
+<!--            id: DayPilot.guid(),-->
+<!--            text: modal.result-->
+<!--          });-->
+<!--        },-->
+<!--        eventDeleteHandling: "Disabled",-->
+<!--        onEventMoved: () => {-->
+<!--          console.log("Event moved");-->
+<!--        },-->
+<!--        onEventResized: () => {-->
+<!--          console.log("Event resized");-->
+<!--        },-->
+<!--      },-->
+<!--    }-->
+<!--  },-->
+<!--  props: {-->
+<!--  },-->
+<!--  components: {-->
+<!--    DayPilotCalendar,-->
+<!--    DayPilotNavigator-->
+<!--  },-->
+<!--  computed: {-->
+<!--    // DayPilot.Calendar object - https://api.daypilot.org/daypilot-calendar-class/-->
+<!--    calendar() {-->
+<!--      return this.$refs.calendar.control;-->
+<!--    }-->
+<!--  },-->
+<!--  methods: {-->
+<!--    loadEvents() {-->
+<!--      // placeholder for an HTTP call-->
+<!--      const events = [-->
+<!--        {-->
+<!--          id: 1,-->
+<!--          start: "2022-02-28T10:00:00",-->
+<!--          end: "2022-02-28T11:00:00",-->
+<!--          text: "Event 1",-->
+<!--          backColor: "#6aa84f",-->
+<!--          borderColor: "#38761d",-->
+<!--        },-->
+<!--        {-->
+<!--          id: 2,-->
+<!--          start: "2022-02-28T13:00:00",-->
+<!--          end: "2022-02-28T16:00:00",-->
+<!--          text: "Event 2",-->
+<!--          backColor: "#f1c232",-->
+<!--          borderColor: "#bf9000",-->
+<!--        },-->
+<!--        {-->
+<!--          id: 3,-->
+<!--          start: "2022-03-01T13:30:00",-->
+<!--          end: "2022-03-01T16:30:00",-->
+<!--          text: "Event 3",-->
+<!--          backColor: "#cc4125",-->
+<!--          borderColor: "#990000",-->
+<!--        },-->
+<!--        {-->
+<!--          id: 4,-->
+<!--          start: "2022-03-01T10:30:00",-->
+<!--          end: "2022-03-01T12:30:00",-->
+<!--          text: "Event 4"-->
+<!--        },-->
+<!--      ];-->
+<!--      this.calendar.update({events});-->
+<!--    },-->
+<!--  },-->
+<!--  mounted() {-->
+<!--    this.loadEvents();-->
+<!--  }-->
+<!--}-->
+<!--</script>-->
+
+<!--<style>-->
+<!--.wrap {-->
+<!--  display: flex;-->
+<!--}-->
+
+<!--.left {-->
+<!--  margin-right: 10px;-->
+<!--}-->
+
+<!--.content {-->
+<!--  flex-grow: 1;-->
+<!--}-->
+
+
+<!--.calendar_default_event_inner {-->
+<!--  background: #2e78d6;-->
+<!--  color: white;-->
+<!--  border-radius: 5px;-->
+<!--  opacity: 0.9;-->
+<!--}-->
+<!--</style>-->
